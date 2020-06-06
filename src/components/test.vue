@@ -9,10 +9,14 @@
 </template>
 
 <script>
+// import axios from 'axios' // 这样用的是依赖模块中原生的方法->通过axios. 来调用，并且使用到了，一定要引用
+import axios from '../config/axios-admin.js'
+// import { adminlogin } from '../api/adminApi.js'
 export default {
   name: 'Login',
   data () {
     return {
+      // 这里的直接绑定，在DevTools中能够随时看到
       loginForm: {
         username: '',
         password: ''
@@ -22,20 +26,19 @@ export default {
   },
   methods: {
     login () {
-      console.log(this.$store.state)
-      this.$axios
-        .post('/login', {
+      axios
+        .post('/client/login', {
           username: this.loginForm.username,
           password: this.loginForm.password
         })
-        .then(successResponse => {
-          if (successResponse.data.code === 200) {
-            alert('数据库连接成功')
-          }
-        })
-        .catch(failResponse => {
-          alert('error')
-        })
+        // .then(successResponse => {
+        //   if (successResponse.data.code === 200) {
+        //     alert('数据库连接成功')
+        //   }
+        // })
+        // .catch(failResponse => {
+        //   alert('error')
+        // })
     }
   }
 }
